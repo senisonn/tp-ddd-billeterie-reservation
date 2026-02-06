@@ -2,14 +2,14 @@
 
 ## Liste des fonctionnalités
 
-- **Gestion de la programmation** : Création, modification et publication d'événements avec définition des dates, salles et configurations.
-- **Gestion des réservations** : Sélection de places, création de paniers temporaires, confirmation et suivi des réservations.
-- **Tarification et réductions** : Calcul dynamique des prix selon la catégorie de place, le profil du spectateur et les promotions actives.
-- **Paiement et remboursement** : Traitement des transactions financières, gestion des remboursements suite aux annulations.
-- **Émission et contrôle des billets** : Génération de billets électroniques avec QR codes et validation à l'entrée des événements.
-- **Gestion des comptes clients** : Création de comptes spectateurs, gestion des abonnements, historique des réservations.
-- **Notifications** : Envoi de confirmations, rappels, alertes de changements par email, SMS et push.
-- **Reporting et pilotage** : Tableaux de bord de fréquentation, taux de remplissage, chiffre d'affaires par événement.
+- **Gestion de la programmation** : Création, modification et publication d'événements avec définition des dates, salles et configurations. *Acteur : Responsable Programmation.*
+- **Gestion des réservations** : Sélection de places, création de paniers temporaires, confirmation et suivi des réservations. *Acteurs : Spectateur, Agent de Billetterie.*
+- **Tarification et réductions** : Calcul dynamique des prix selon la catégorie de place, le profil du spectateur et les promotions actives. *Acteur : Responsable Programmation (définition des règles), Système (calcul automatique).*
+- **Paiement et remboursement** : Traitement des transactions financières, gestion des remboursements suite aux annulations. *Acteur : Spectateur.*
+- **Émission et contrôle des billets** : Génération de billets électroniques avec QR codes et validation à l'entrée des événements. *Acteur : Agent de Billetterie.*
+- **Gestion des comptes clients** : Création de comptes spectateurs, gestion des abonnements, historique des réservations. *Acteur : Spectateur.*
+- **Notifications** : Envoi de confirmations, rappels, alertes de changements par email, SMS et push. *Acteur : Système (automatique).*
+- **Reporting et pilotage** : Tableaux de bord de fréquentation, taux de remplissage, chiffre d'affaires par événement. *Acteur : Responsable Programmation.*
 
 ## Classification des sous-domaines
 

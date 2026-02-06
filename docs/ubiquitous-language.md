@@ -12,8 +12,8 @@
 | Panier | Un conteneur temporaire qui regroupe les places sélectionnées par un spectateur avant le paiement. Le panier a une durée de vie limitée (expiration) pour libérer les places non confirmées. | Le panier de Marie contient 2 places Orchestre pour le concert de Jazz, il expire dans 8 minutes. |
 | Tarif | Le prix applicable à une place pour un événement, calculé à partir du tarif de base de la catégorie et des éventuelles réductions. Le tarif final tient compte du profil du spectateur et des promotions actives. | Le tarif étudiant pour une place Orchestre au concert de Jazz est de 36 € (45 € - 20 % de réduction). |
 | Réduction | Une diminution du prix accordée selon des critères définis (âge, statut, abonnement, code promotionnel). Une réduction s'applique sur le tarif de base et ne peut pas se cumuler avec d'autres réductions sauf mention contraire. | La réduction étudiant de 20 % s'applique sur présentation d'un justificatif valide. |
-| Paiement | La transaction financière qui valide une réservation. Un paiement est associé à un montant, un moyen de paiement et un statut (en cours, accepté, refusé, remboursé). | Le paiement PAY-2025-00198 de 72 € par carte bancaire pour la réservation de Marie est au statut « Accepté ». |
-| Remboursement | Le retour total ou partiel du montant payé suite à une annulation de réservation ou à l'annulation d'un événement. Les conditions de remboursement dépendent du délai et de la politique en vigueur. | Le remboursement de 72 € sur la carte de Marie sera effectué sous 5 jours ouvrés. |
+| Paiement | La transaction financière qui valide une réservation. Un paiement est associé à un montant, un moyen de paiement et un statut (en cours, accepté, refusé, remboursé). | Le paiement PAY-2025-00198 de 76 € par carte bancaire pour la réservation de Marie est au statut « Accepté ». |
+| Remboursement | Le retour total ou partiel du montant payé suite à une annulation de réservation ou à l'annulation d'un événement. Les conditions de remboursement dépendent du délai et de la politique en vigueur. | Le remboursement de 76 € sur la carte de Marie sera effectué sous 5 jours ouvrés. |
 | QRCode | Un code-barres bidimensionnel unique généré pour chaque billet, servant de preuve d'achat et de titre d'accès. Il est scanné à l'entrée de l'événement pour valider l'accès du spectateur. | Le QR code QR-X7K9M est scanné à l'entrée et le système confirme sa validité. |
 | PlanDeSalle | La représentation spatiale de l'agencement des places dans une salle, incluant les zones, rangées et numéros de sièges. Il permet au spectateur de choisir visuellement ses places lors de la réservation. | Le plan de salle de la Grande Salle affiche les places disponibles en vert et les places réservées en rouge. |
 | OuvertureDesVentes | Le moment précis à partir duquel les billets d'un événement deviennent disponibles à l'achat. L'ouverture peut être décalée selon le type de public (prévente abonnés, vente générale). | L'ouverture des ventes du concert de Jazz est fixée au 1er février 2025 à 10h00 pour les abonnés. |
@@ -25,6 +25,10 @@
 | TransfertDeBillet | Le changement de titulaire d'un billet d'un spectateur à un autre, soumis à validation par le système. Le transfert est tracé et le nouveau titulaire reçoit un nouveau QR code. | Marie transfère son billet à Paul, un nouveau QR code QR-M2P8N est généré au nom de Paul. |
 | NotificationClient | Un message envoyé au spectateur pour l'informer d'un changement relatif à sa réservation ou à un événement. Les notifications sont envoyées par email, SMS ou notification push selon les préférences du spectateur. | Marie reçoit un email de confirmation de sa réservation avec les billets en pièce jointe. |
 | FraisDeService | Un montant supplémentaire facturé par la plateforme en sus du prix du billet pour couvrir les coûts de gestion. Les frais de service varient selon le canal d'achat (en ligne vs guichet). | Des frais de service de 2 € par billet s'ajoutent au prix pour les achats en ligne. |
+| ResponsableProgrammation | Le rôle de direction qui supervise la programmation des événements, définit les politiques tarifaires et les quotas de places. Il valide les ouvertures de vente et analyse les performances commerciales via des tableaux de bord. | Le Responsable Programmation planifie la saison Jazz 2025 et décide de l'ouverture des ventes pour le concert du 15 mars. |
+| AgentDeBilletterie | Le rôle opérationnel chargé de la vente de billets au guichet, du traitement des demandes spéciales des clients et du contrôle des billets à l'entrée des événements. Il gère également les situations exceptionnelles comme les sur-réservations ou les incidents. | L'Agent de Billetterie scanne le QR code de Marie à l'entrée du concert et autorise son accès. |
+| StatutRéservation | L'état courant d'une réservation dans son cycle de vie. Les statuts possibles forment une machine à états stricte : EnAttente (panier créé, paiement non reçu), Confirmée (paiement accepté, billets générés), Annulée (annulation volontaire ou paiement refusé), Remboursée (remboursement effectué après annulation). Les transitions sont irréversibles pour les statuts terminaux. | La réservation RES-2025-00142 passe de « EnAttente » à « Confirmée » après réception du paiement de 76 €. |
+| StatutVente | L'état courant de la disponibilité à la vente d'un événement. Les statuts possibles sont : Fermé (ventes non encore ouvertes), Prévente (ouvert aux abonnés uniquement), OuvertAuPublic (vente générale), Complet (jauge à zéro, plus aucune place disponible), Terminé (événement passé). Le statut évolue automatiquement en fonction de la période de vente et de la jauge. | Le Concert Jazz passe au statut « Complet » lorsque les 500 places sont toutes réservées. |
 
 ## Termes par contexte
 
@@ -42,7 +46,7 @@
 | Réduction | ContexteTarification | Appliquée lors du calcul du tarif |
 | Paiement | ContextePaiement | Transaction financière, externe au domaine métier principal |
 | Remboursement | ContextePaiement | Déclenché par une annulation |
-| QRCode | ContexteContrôleAccès | Généré à la confirmation, validé à l'entrée |
+| QRCode | ContexteRéservation | Généré par le ContexteRéservation à la confirmation, validé par le ContexteContrôleAccès à l'entrée |
 | PlanDeSalle | ContexteRéservation | Représentation visuelle pour le choix des places |
 | OuvertureDesVentes | ContexteProgrammation | Politique définie par la direction |
 | Annulation | ContexteRéservation | Peut déclencher un remboursement |
@@ -53,3 +57,7 @@
 | TransfertDeBillet | ContexteRéservation | Changement de titulaire |
 | NotificationClient | ContexteNotification | Communication multi-canal |
 | FraisDeService | ContexteTarification | Montant additionnel de gestion |
+| ResponsableProgrammation | ContexteProgrammation | Acteur métier de type Direction, initie les commandes de programmation |
+| AgentDeBilletterie | ContexteContrôleAccès | Acteur métier opérationnel, initie les commandes de contrôle d'accès et de vente guichet |
+| StatutRéservation | ContexteRéservation | Machine à états : EnAttente → Confirmée → Annulée → Remboursée |
+| StatutVente | ContexteProgrammation | Machine à états : Fermé → Prévente → OuvertAuPublic → Complet / Terminé |
