@@ -2,11 +2,11 @@
 
 ## RéservationRepository
 
-Le `RéservationRepository` gère la persistance de l'agrégat Réservation et de ses composants internes (PlaceAssignée, Billet, MontantTarifé).
+Le `RéservationRepository` gère la persistance de l'agrégat Réservation et de ses composants internes (Billet avec PlaceAssignée, MontantTarifé).
 
 | Opération métier | Description | Contraintes / règles métier |
 |-----------------|-------------|---------------------------|
-| CréerRéservation | Enregistre une nouvelle réservation avec ses places assignées et son montant tarifé. L'opération persiste l'ensemble de l'agrégat en une seule transaction atomique. Le statut initial est « EnAttente ». | L'identifiant RéservationId doit être unique dans tout le système. Les places référencées doivent être disponibles au moment de l'enregistrement (vérifié par un verrou optimiste). La réservation doit respecter l'invariant INV-R1 (1 à 10 places). |
+| CréerRéservation | Enregistre une nouvelle réservation avec son montant tarifé. Le statut initial est « EnAttente ». Les billets (avec PlaceAssignée et QR code) sont ajoutés lors de la confirmation. L'opération persiste l'ensemble de l'agrégat en une seule transaction atomique. | L'identifiant RéservationId doit être unique dans tout le système. Les places référencées doivent être disponibles au moment de l'enregistrement (vérifié par un verrou optimiste). La réservation doit respecter l'invariant INV-R1 (1 à 10 billets). |
 | RechercherParId | Récupère une réservation complète (avec ses places, billets et montant) à partir de son identifiant unique RéservationId. Retourne l'agrégat complet ou une indication d'absence. | L'agrégat retourné doit être complet et cohérent, incluant toutes les entités et objets valeur internes. Aucune réservation partielle ne doit être retournée. |
 | RechercherParSpectateur | Liste toutes les réservations d'un spectateur donné, triées par date de réservation décroissante. Permet l'affichage de l'historique des réservations dans le compte client. | Seules les réservations du spectateur identifié sont retournées. Les réservations dans tous les statuts sont incluses (EnAttente, Confirmée, Annulée, Remboursée). |
 | MettreÀJourStatut | Met à jour le statut d'une réservation existante (ex : EnAttente → Confirmée, Confirmée → Annulée). L'opération vérifie la validité de la transition de statut avant de persister. | Les transitions de statut doivent respecter le cycle de vie : EnAttente → Confirmée ou Annulée ; Confirmée → Annulée ; Annulée → Remboursée. L'invariant INV-R4 (irréversibilité des statuts terminaux) doit être vérifié. |
@@ -14,7 +14,7 @@ Le `RéservationRepository` gère la persistance de l'agrégat Réservation et d
 
 ## ÉvénementRepository
 
-Le `ÉvénementRepository` gère la persistance de l'agrégat Événement et de ses composants internes (PériodeDeVente, Catégorie, ConfigurationSalle).
+Le `ÉvénementRepository` gère la persistance de l'agrégat Événement et de ses composants internes (PériodeDeVente, Place, ConfigurationZone).
 
 | Opération métier | Description | Contraintes / règles métier |
 |-----------------|-------------|---------------------------|
@@ -22,3 +22,13 @@ Le `ÉvénementRepository` gère la persistance de l'agrégat Événement et de 
 | RechercherParId | Récupère un événement complet à partir de son identifiant ÉvénementId. Retourne l'agrégat avec toutes ses données (jauge actuelle, catégories, période de vente). | L'agrégat retourné reflète l'état courant de la jauge. Les données doivent être cohérentes avec les réservations en cours. |
 | RechercherDisponibles | Liste les événements dont la vente est ouverte et qui disposent de places disponibles. Permet la recherche par date, genre, salle avec pagination. | Seuls les événements avec un statutVente « Prévente » ou « OuvertAuPublic » et une jauge > 0 sont retournés. Les événements passés ou au statut « Terminé » sont exclus. |
 | MettreÀJourJauge | Met à jour la jauge disponible d'un événement suite à une réservation ou une annulation. Décrémente ou incrémente le compteur et met à jour le statut de vente si nécessaire. | La jauge ne peut jamais être négative (INV-E1). Si la jauge atteint 0, le statut passe automatiquement à « Complet » (INV-E2). Si la jauge repasse au-dessus de 0 après une annulation, le statut repasse à « OuvertAuPublic ». Utilisation d'un verrou optimiste pour gérer la concurrence. |
+
+## SalleRepository *(ContexteProgrammation)*
+
+Le `SalleRepository` gère la persistance de l'entité Salle et de ses composants internes (ConfigurationZone).
+
+| Opération métier | Description | Contraintes / règles métier |
+|-----------------|-------------|---------------------------|
+| CréerSalle | Enregistre une nouvelle salle avec sa capacité totale et la configuration de ses zones. Les places physiques sont dérivées des zones lors de la création d'un événement. | L'identifiant SalleId doit être unique. La capacité totale doit correspondre à la somme des places calculées à partir des zones (nbRangées × placesParRangée par zone). |
+| RechercherParId | Récupère une salle complète avec ses zones et sa capacité à partir de son identifiant SalleId. | L'agrégat retourné doit être complet avec toutes les ConfigurationZone. |
+| ListerToutes | Retourne la liste de toutes les salles disponibles pour la programmation d'événements. | Seules les salles actives (non archivées) sont retournées. |

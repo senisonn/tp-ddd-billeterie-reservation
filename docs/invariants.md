@@ -5,9 +5,9 @@
 **Racine de l'agrégat :** Réservation
 
 **Entités / Objets Valeur internes :**
-- PlaceAssignée (OV) — les places sélectionnées
-- MontantTarifé (OV) — le montant calculé
-- Billet (Entité interne) — les billets générés après confirmation
+- Billet (Entité interne) — un billet par place, généré à la confirmation ; contient le QR code et le statut
+- PlaceAssignée (OV, porté par Billet) — la localisation physique de la place du billet
+- MontantTarifé (OV) — le montant global calculé pour la réservation
 
 ### Invariants
 
@@ -23,9 +23,9 @@
 **Racine de l'agrégat :** Événement
 
 **Entités / Objets Valeur internes :**
-- PériodeDeVente (OV) — la fenêtre de vente
-- Catégorie (OV) — les catégories de places avec tarifs de base
-- ConfigurationSalle (OV) — la configuration des places dans la salle
+- PériodeDeVente (OV) — la fenêtre temporelle de vente
+- ConfigurationZone (OV) — les zones de la salle avec nombre de rangées et places par rangée
+- Place (OV) — chaque siège physique identifié par zone, rangée, numéro et catégorie
 
 ### Invariants
 
@@ -44,17 +44,14 @@
 │  │           «Racine» Réservation                  │        │
 │  │  réservationId, statut, dateRéservation         │        │
 │  │                                                 │        │
-│  │  ┌──────────────┐  ┌──────────────┐             │        │
-│  │  │«OV» Place    │  │«OV» Montant  │             │        │
-│  │  │ Assignée     │  │  Tarifé      │             │        │
-│  │  │ [1..10]      │  │ [1]          │             │        │
-│  │  └──────────────┘  └──────────────┘             │        │
-│  │                                                 │        │
-│  │  ┌──────────────┐                               │        │
-│  │  │«Entité»      │                               │        │
-│  │  │ Billet       │                               │        │
-│  │  │ [0..10]      │                               │        │
-│  │  └──────────────┘                               │        │
+│  │  ┌──────────────────────────────┐  ┌──────────────┐  │        │
+│  │  │«Entité» Billet  [1..10]     │  │«OV» Montant  │  │        │
+│  │  │ billetId, qrCode, statut    │  │  Tarifé [1]  │  │        │
+│  │  │  ┌────────────────────────┐ │  └──────────────┘  │        │
+│  │  │  │«OV» PlaceAssignée [1]  │ │                    │        │
+│  │  │  │ zone, rangée, numéro   │ │                    │        │
+│  │  │  └────────────────────────┘ │                    │        │
+│  │  └──────────────────────────────┘                   │        │
 │  └─────────────────────────────────────────────────┘        │
 │  Invariants : INV-R1, INV-R2, INV-R3, INV-R4               │
 └─────────────────────────────────────────────────────────────┘
@@ -67,12 +64,11 @@
 │  │                                                 │        │
 │  │  ┌──────────────┐  ┌──────────────────────┐     │        │
 │  │  │«OV» Période  │  │«OV» Configuration   │     │        │
-│  │  │  DeVente     │  │     Salle            │     │        │
-│  │  │ [1]          │  │ [1]                  │     │        │
+│  │  │  DeVente [1] │  │    Zone [1..*]       │     │        │
 │  │  └──────────────┘  └──────────────────────┘     │        │
 │  │                                                 │        │
 │  │  ┌──────────────┐                               │        │
-│  │  │«OV» Catégorie│                               │        │
+│  │  │«OV» Place    │                               │        │
 │  │  │ [1..*]       │                               │        │
 │  │  └──────────────┘                               │        │
 │  └─────────────────────────────────────────────────┘        │

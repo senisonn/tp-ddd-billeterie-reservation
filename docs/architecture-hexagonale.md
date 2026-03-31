@@ -4,7 +4,7 @@
 
 ### Domain (coeur métier)
 
-La couche Domain contient l'ensemble des règles métier pures du système de billetterie. Elle regroupe les entités (Réservation, Événement, Spectateur), les objets valeur (MontantTarifé, PlaceAssignée, PériodeDeVente), les agrégats avec leurs invariants, ainsi que les événements de domaine (RéservationConfirmée, PaiementAccepté). Cette couche n'a aucune dépendance technique : elle ne connaît ni la base de données, ni les API REST, ni le broker de messages. Elle définit également les interfaces (ports) que les couches extérieures doivent implémenter, comme `RéservationRepository` ou `ServiceDePaiement`.
+La couche Domain contient l'ensemble des règles métier pures du système de billetterie. Elle regroupe les entités par contexte — **ContexteProgrammation** : Événement, Salle, Saison ; **ContexteRéservation** : Réservation, Billet, Spectateur — ainsi que les objets valeur (MontantTarifé, PlaceAssignée, PériodeDeVente, Place, ConfigurationZone), les agrégats avec leurs invariants, et les événements de domaine (RéservationConfirmée, BilletGénéré, PaiementAccepté). Cette couche n'a aucune dépendance technique : elle ne connaît ni la base de données, ni les API REST, ni le broker de messages. Elle définit également les interfaces (ports) que les couches extérieures doivent implémenter, comme `RéservationRepository`, `SalleRepository` ou `ServiceDePaiement`.
 
 ### Application (orchestration)
 
@@ -24,7 +24,7 @@ La couche Adapters implémente les ports définis par le domaine et fournit les 
 
 3. Le service appelle le **port** `ServiceDeTarification` pour obtenir le `MontantTarifé` des places sélectionnées. L'adaptateur sortant appelle l'API REST du contexte Tarification.
 
-4. Le **domaine** crée l'agrégat Réservation avec les PlaceAssignée et le MontantTarifé. Les invariants sont vérifiés (nombre de places entre 1 et 10, places disponibles). L'événement de domaine `RéservationCréée` est émis.
+4. Le **domaine** crée l'agrégat Réservation avec le MontantTarifé. Les invariants sont vérifiés (nombre de places entre 1 et 10, places disponibles). À la confirmation du paiement, un `Billet` (avec BilletId, QR code unique et PlaceAssignée) est généré pour chaque place. Les événements de domaine `RéservationCréée` puis `BilletGénéré` sont émis.
 
 5. Le service applicatif persiste la Réservation via le `RéservationRepository` (adaptateur sortant → PostgreSQL) et publie l'événement `RéservationCréée` sur le broker (adaptateur sortant → RabbitMQ).
 

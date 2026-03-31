@@ -29,6 +29,8 @@
 | AgentDeBilletterie | Le rôle opérationnel chargé de la vente de billets au guichet, du traitement des demandes spéciales des clients et du contrôle des billets à l'entrée des événements. Il gère également les situations exceptionnelles comme les sur-réservations ou les incidents. | L'Agent de Billetterie scanne le QR code de Marie à l'entrée du concert et autorise son accès. |
 | StatutRéservation | L'état courant d'une réservation dans son cycle de vie. Les statuts possibles forment une machine à états stricte : EnAttente (panier créé, paiement non reçu), Confirmée (paiement accepté, billets générés), Annulée (annulation volontaire ou paiement refusé), Remboursée (remboursement effectué après annulation). Les transitions sont irréversibles pour les statuts terminaux. | La réservation RES-2025-00142 passe de « EnAttente » à « Confirmée » après réception du paiement de 76 €. |
 | StatutVente | L'état courant de la disponibilité à la vente d'un événement. Les statuts possibles sont : Fermé (ventes non encore ouvertes), Prévente (ouvert aux abonnés uniquement), OuvertAuPublic (vente générale), Complet (jauge à zéro, plus aucune place disponible), Terminé (événement passé). Le statut évolue automatiquement en fonction de la période de vente et de la jauge. | Le Concert Jazz passe au statut « Complet » lorsque les 500 places sont toutes réservées. |
+| StatutBillet | L'état courant d'un billet dans son cycle de vie. Les statuts possibles sont : Valide (billet émis et non utilisé), Utilisé (QR code scanné à l'entrée), Annulé (réservation annulée). Seul un billet Valide peut être présenté à l'entrée. | Le billet BIL-2025-00283 passe de « Valide » à « Utilisé » lorsque Marie entre dans la salle. |
+| Saison | Un ensemble d'événements programmés sur une période annuelle par le Responsable Programmation. La saison structure la planification et permet d'ouvrir des préventes groupées pour les abonnés. | La saison « Jazz 2025 » regroupe 15 concerts planifiés de janvier à décembre 2025. |
 
 ## Termes par contexte
 
@@ -36,7 +38,7 @@
 |-------|-------------------|-------------|
 | Événement | ContexteProgrammation | Créé et géré dans la programmation, référencé dans tous les autres contextes |
 | Salle | ContexteProgrammation | Configuration statique, utilisée par la réservation pour le plan de salle |
-| Place | ContexteRéservation | Disponibilité gérée dynamiquement dans le contexte réservation |
+| Place | ContexteProgrammation | Siège physique défini lors de la configuration de la salle |
 | Catégorie | ContexteTarification | Définit le tarif de base, liée à la salle |
 | Réservation | ContexteRéservation | Entité centrale du processus de réservation |
 | Billet | ContexteRéservation | Généré après confirmation de la réservation |
@@ -47,7 +49,7 @@
 | Paiement | ContextePaiement | Transaction financière, externe au domaine métier principal |
 | Remboursement | ContextePaiement | Déclenché par une annulation |
 | QRCode | ContexteRéservation | Généré par le ContexteRéservation à la confirmation, validé par le ContexteContrôleAccès à l'entrée |
-| PlanDeSalle | ContexteRéservation | Représentation visuelle pour le choix des places |
+| PlanDeSalle | ContexteProgrammation | Défini lors de la configuration de la salle, consommé par la réservation |
 | OuvertureDesVentes | ContexteProgrammation | Politique définie par la direction |
 | Annulation | ContexteRéservation | Peut déclencher un remboursement |
 | Jauge | ContexteRéservation | Mise à jour temps réel |
@@ -61,3 +63,5 @@
 | AgentDeBilletterie | ContexteContrôleAccès | Acteur métier opérationnel, initie les commandes de contrôle d'accès et de vente guichet |
 | StatutRéservation | ContexteRéservation | Machine à états : EnAttente → Confirmée → Annulée → Remboursée |
 | StatutVente | ContexteProgrammation | Machine à états : Fermé → Prévente → OuvertAuPublic → Complet / Terminé |
+| StatutBillet | ContexteRéservation / ContexteContrôleAccès | Machine à états : Valide → Utilisé / Annulé |
+| Saison | ContexteProgrammation | Regroupe les événements d'une période annuelle |
