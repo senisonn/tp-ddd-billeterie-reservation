@@ -184,12 +184,18 @@ components:
           enum: [EnAttente, Confirmee, Annulee, Remboursee]
         evenement_id:   { type: string }
         spectateur_id:  { type: string }
-        places:
+        montant_total:  { type: number }
+        places_choisies:
+          description: >
+            Présent uniquement au statut EnAttente. Représente les places
+            sélectionnées avant confirmation. Absent une fois les billets générés.
           type: array
           items:
             $ref: '#/components/schemas/PlaceAssignee'
-        montant_total:  { type: number }
         billets:
+          description: >
+            Présent uniquement aux statuts Confirmee / Annulee / Remboursee.
+            Chaque billet porte sa PlaceAssignée, son QR code et son statut.
           type: array
           items:
             $ref: '#/components/schemas/Billet'
@@ -197,8 +203,11 @@ components:
     Billet:
       type: object
       properties:
-        billet_id: { type: string }
-        qr_code:   { type: string }
+        billet_id: { type: string, example: "BIL-2025-00283" }
+        qr_code:   { type: string, example: "QR-X7K9M-2025-00283" }
+        statut:
+          type: string
+          enum: [Valide, Utilise, Annule]
         place:
           $ref: '#/components/schemas/PlaceAssignee'
 

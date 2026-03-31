@@ -6,7 +6,7 @@
 
 - **Given** : Un spectateur authentifié et un événement « Concert Jazz » avec 50 places disponibles.
 - **When** : Le spectateur crée une réservation avec 3 places (A1, A2, A3) en catégorie Orchestre.
-- **Then** : La réservation est créée avec succès au statut « EnAttente », contenant les 3 places sélectionnées. La jauge de l'événement est décrémentée de 3 (47 places restantes).
+- **Then** : La réservation est créée avec succès au statut « EnAttente » avec les 3 places choisies enregistrées. Aucun billet n'est encore généré (les billets sont émis à la confirmation du paiement). La jauge de l'événement est décrémentée de 3 (47 places restantes).
 
 #### Scénario 2 – Sad path
 

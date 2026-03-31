@@ -38,7 +38,7 @@
     "nom": "Concert Jazz - Miles & Friends",
     "date": "2025-03-15T20:30:00"
   },
-  "places": [
+  "placesChoisies": [
     {
       "zone": "Orchestre",
       "rangée": "A",
@@ -63,6 +63,8 @@
   "dateRéservation": "2025-02-10T15:25:00"
 }
 ```
+
+> **Note** : au statut `EnAttente`, aucun billet n'est encore émis. Les `placesChoisies` reflètent la sélection du spectateur. Les billets (avec BilletId et QR code) sont générés uniquement à la confirmation du paiement.
 
 ## Endpoint 2 : Consulter une réservation
 
@@ -92,20 +94,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
     "spectateurId": "CLI-2025-00089",
     "nom": "Marie Dupont"
   },
-  "places": [
-    {
-      "zone": "Orchestre",
-      "rangée": "A",
-      "numéro": 12,
-      "catégorie": "Premium"
-    },
-    {
-      "zone": "Orchestre",
-      "rangée": "A",
-      "numéro": 13,
-      "catégorie": "Premium"
-    }
-  ],
   "montant": {
     "tarifBase": 90.00,
     "réduction": 18.00,
@@ -116,15 +104,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
   "billets": [
     {
       "billetId": "BIL-2025-00283",
-      "place": "Orchestre A12",
       "qrCode": "QR-X7K9M-2025-00283",
-      "statut": "Valide"
+      "statut": "Valide",
+      "place": {
+        "zone": "Orchestre",
+        "rangée": "A",
+        "numéro": 12,
+        "catégorie": "Premium"
+      }
     },
     {
       "billetId": "BIL-2025-00284",
-      "place": "Orchestre A13",
       "qrCode": "QR-P3L2N-2025-00284",
-      "statut": "Valide"
+      "statut": "Valide",
+      "place": {
+        "zone": "Orchestre",
+        "rangée": "A",
+        "numéro": 13,
+        "catégorie": "Premium"
+      }
     }
   ],
   "dateRéservation": "2025-02-10T15:25:00",

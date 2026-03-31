@@ -105,18 +105,39 @@ class ReservationHandler(BaseHTTPRequestHandler):
         return json.loads(self.rfile.read(length)) if length else {}
 
     def _reservation_to_dict(self, res) -> dict:
-        return {
+        d = {
             "reservation_id": res.reservation_id,
             "statut":         res.statut.name,
             "evenement_id":   res.evenement_id,
             "spectateur_id":  res.spectateur_id,
             "montant_total":  res.montant.total,
-            "nb_places":      len(res.places),
-            "billets": [
-                {"billet_id": b.billet_id, "qr_code": b.qr_code}
-                for b in res.billets
-            ],
         }
+        if res.billets:
+            d["billets"] = [
+                {
+                    "billet_id": b.billet_id,
+                    "qr_code":   b.qr_code,
+                    "statut":    "Valide",
+                    "place": {
+                        "zone":      b.place.zone,
+                        "rangee":    b.place.rangee,
+                        "numero":    b.place.numero,
+                        "categorie": b.place.categorie,
+                    },
+                }
+                for b in res.billets
+            ]
+        else:
+            d["places_choisies"] = [
+                {
+                    "zone":      p.zone,
+                    "rangee":    p.rangee,
+                    "numero":    p.numero,
+                    "categorie": p.categorie,
+                }
+                for p in res.places
+            ]
+        return d
 
     # ------------------------------------------------------------------ #
     #  Routing                                                             #
