@@ -64,23 +64,23 @@ La relation est de type **Customer/Supplier** : le ContexteTarification (Supplie
         │                          │                          │  Envoie email
         │                          │                          │  + billets PDF
         │                          │                          │  au spectateur
-        │                          │
-        │                          │       ContexteContrôleAccès
-        │                          │                │
-        │                          │  RéservationConfirmée
-        │                          │───────────────►│
-        │                          │                │  Active les QR codes
-        │                          │                │  des billets générés
-        │                          │                │
-        │  Réservation annulée     │
-        │  → publie événement      │
-        │  RéservationAnnulée      │
-        │─────────────────────────►│
-        │                          │  RéservationAnnulée      │
-        │                          │─────────────────────────►│  Email annulation
-        │                          │
-        │                          │  RéservationAnnulée    ContexteContrôleAccès
-        │                          │───────────────────────►│  Invalide QR codes
+        │                          │                          │
+        │                          │                          │                              ContexteContrôleAccès
+        │                          │                          │                                      │
+        │                          │                          │                              RéservationConfirmée
+        │                          │───────────────────────────────────────────────────────────────► │
+        │                          │                          │                                      │  Active les QR codes
+        │                          │                          │                                      │  des billets générés
+        │                          │                          │                                      │
+        │  Réservation annulée     │                          │                                      │
+        │  → publie événement      │                          │                                      │
+        │  RéservationAnnulée      │                          │                                      │
+        │─────────────────────────►│                          │                                      │
+        │                          │  RéservationAnnulée      │                                      │
+        │                          │─────────────────────────►│  Email annulation                    │
+        │                          │                                                                 │
+        │                          │  RéservationAnnulée                                             │
+        │                          │────────────────────────────────────────────────────────────────►│  Invalide QR codes
 ```
 
 ### Narration
