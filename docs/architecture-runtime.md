@@ -6,34 +6,34 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          docker-compose                                  │
+│                          docker-compose                                 │
 │                                                                         │
-│  ┌──────────────────┐        ┌──────────────────┐                       │
-│  │  api-reservation  │◄──────►│    api-tarif      │                      │
-│  │  :8080            │  REST  │    :8081          │                      │
-│  │  (ContexteRéserv.)│        │  (ContexteTarif.) │                      │
-│  └────────┬─────────┘        └──────────────────┘                       │
-│           │                                                              │
-│           │ SQL                      publish/subscribe                   │
-│           ▼                                   ▼                          │
-│  ┌──────────────────┐        ┌──────────────────────────────────┐       │
-│  │    postgres       │        │           rabbitmq               │       │
-│  │    :5432          │        │           :5672 (AMQP)           │       │
-│  │  DB billetterie   │        │           :15672 (Management UI) │       │
-│  └──────────────────┘        └──────┬─────────────┬────────────┘       │
-│                                      │             │                     │
-│                              subscribe│             │subscribe            │
-│                                      ▼             ▼                     │
+│  ┌──────────────────┐        ┌───────────────────┐                      │
+│  │  api-reservation  │◄─────►│    api-tarif      │                      │
+│  │  :8080            │  REST │    :8081          │                      │
+│  │  (ContexteRéserv.)│       │  (ContexteTarif.) │                      │
+│  └────────┬─────────┘        └───────────────────┘                      │
+│           │                                                             │
+│           │ SQL                      publish/subscribe                  │
+│           ▼                                   ▼                         │
+│  ┌───────────────────┐        ┌──────────────────────────────────┐      │
+│  │    postgres       │        │           rabbitmq               │      │
+│  │    :5432          │        │           :5672 (AMQP)           │      │
+│  │  DB billetterie   │        │           :15672 (Management UI) │      │
+│  └───────────────────┘        └──────┬─────────────┬─────────────┘      │
+│                                      │             │                    │
+│                             subscribe│             │subscribe           │
+│                                      ▼             ▼                    │
 │                        ┌─────────────────┐  ┌───────────────────┐       │
-│                        │ api-notification │  │ api-controle-acces│       │
-│                        │ :8082            │  │ :8083             │       │
-│                        │ (ContexteNotif.) │  │ (ContexteCtrlAcc.)│       │
+│                        │ api-notification│  │ api-controle-acces│       │
+│                        │ :8082           │  │ :8083             │       │
+│                        │ (ContexteNotif.)│  │ (ContexteCtrlAcc.)│       │
 │                        └─────────────────┘  └───────────────────┘       │
 │                                                                         │
 │  ┌──────────────────┐        ┌──────────────────┐                       │
-│  │   prometheus      │scrape  │     grafana       │                      │
-│  │   :9090           │◄───────│     :3000         │                      │
-│  │  (métriques)      │  /metrics│  (dashboards)   │                      │
+│  │   prometheus     │scrape  │     grafana      │                       │
+│  │   :9090          │◄────── │    :3000         │                       │
+│  │  (métriques)     │/metrics│  (dashboards)    │                       │
 │  └──────────────────┘        └──────────────────┘                       │
 └─────────────────────────────────────────────────────────────────────────┘
 ```

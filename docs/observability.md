@@ -57,9 +57,9 @@ Tous les logs sont émis en JSON (un objet par ligne), exploitables par ELK / Lo
 }
 ```
 
-### Captures de logs réels (exécution locale)
+### Captures de logs 
 
-Sortie produite par `adapters/event_bus.py` lors du scénario bout-en-bout :
+Sortie produite par lors du scénario bout-en-bout :
 
 ```json
 {"timestamp": "2025-02-10 14:32:05,101", "level": "INFO", "logger": "billetterie.eventbus",
@@ -108,7 +108,7 @@ Trois métriques exposées sur `GET /metrics` (format JSON, production → Prome
 }
 ```
 
-### Implémentation (`adapters/rest_api.py`)
+### Implémentation
 
 ```python
 _metrics = {

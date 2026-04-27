@@ -45,8 +45,8 @@
 │ dateÉvénement : Date                                │
 │ statut : StatutPublication                          │
 │ jaugeDisponible : Nombre                            │
-│ périodeDeVente : PériodeDeVente  ◄── «OV»          │
-│ places : List<Place>             ◄── «OV»          │
+│ périodeDeVente : PériodeDeVente  ◄── «OV»           │
+│ places : List<Place>             ◄── «OV»           │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -74,7 +74,7 @@
 ```
 ┌─────────────────────────┐         ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
 │      «Entité»           │           «Réf. externe»
-│     Spectateur          │         │  Événement              │
+│     Spectateur          │         │  Événement            │
 ├─────────────────────────┤           (ContexteProgrammation)
 │ spectateurId : Id       │         └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
 │ nom : Texte             │                    │ 1
@@ -100,7 +100,7 @@
                               │ billetId : BilletId              │
                               │ qrCode : QRCode                  │
                               │ statut : StatutBillet            │
-                              │ place : PlaceAssignée  ◄── «OV» │
+                              │ place : PlaceAssignée  ◄── «OV»  │
                               └──────────────────────────────────┘
                                              │ composition
                                              ▼

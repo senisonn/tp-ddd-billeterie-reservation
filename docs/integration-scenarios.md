@@ -23,30 +23,30 @@ Le ContexteNotification consomme l'événement `RéservationConfirmée` et envoi
 ```
 Spectateur    Ctrl REST     SvcApp         Programmation   Tarification   Paiement    Notification
     │             │            │                │               │             │             │
-    │──POST /api──►│            │                │               │             │             │
-    │  réservation │            │                │               │             │             │
-    │             │──Commande──►│                │               │             │             │
-    │             │            │──GET événement─►│               │             │             │
-    │             │            │◄──Dispo OK──────│               │             │             │
-    │             │            │──POST calcul───────────────────►│             │             │
+    │──POST /api─►│            │                │               │             │             │
+    │ réservation │            │                │               │             │             │
+    │             │──Commande─►│                │               │             │             │
+    │             │            │─GET événement─►│               │             │             │
+    │             │            │◄──Dispo OK─────│               │             │             │
+    │             │            │──POST calcul──────────────────►│             │             │
     │             │            │◄──MontantTarifé────────────────│             │             │
     │             │            │                │               │             │             │
-    │             │            │  Créer agrégat  │               │             │             │
-    │             │            │  Vérifier inv.  │               │             │             │
-    │             │            │  Persister      │               │             │             │
-    │             │            │──Publier evt────────────────────────────────────────────────►│
+    │             │            │  Créer agrégat │               │             │             │
+    │             │            │  Vérifier inv. │               │             │             │
+    │             │            │  Persister     │               │             │             │
+    │             │            │──Publier evt──────────────────────────────────────────────►│
     │             │◄──201──────│                │               │             │             │
     │◄──Réponse───│            │                │               │             │             │
     │             │            │                │               │             │             │
-    │──Paiement──────────────────────────────────────────────────►│             │             │
-    │             │            │                │               │ │──Stripe───►│             │
-    │             │            │                │               │ │◄──Webhook──│             │
-    │             │            │◄──PaiementOK──────────────────────│             │             │
+    │──Paiement────────────────────────────────────────────────►│             │             │
+    │             │            │                │               │ │─Stripe───►│             │
+    │             │            │                │               │ │◄─Webhook──│             │
+    │             │            │◄──PaiementOK───────────────────│             │             │
     │             │            │                │               │             │             │
-    │             │            │  Confirmer rés. │               │             │             │
-    │             │            │  Générer billets│               │             │             │
-    │             │            │──Publier evt────────────────────────────────────────────────►│
-    │             │            │                │               │             │  Envoi email │
-    │◄──────────────────────────────────────────────────────────────────────────Email+billets│
+    │             │            │ Confirmer rés. │               │             │             │
+    │             │            │ Générer billets│               │             │             │
+    │             │            │──Publier evt──────────────────────────────────────────────►│
+    │             │            │                │               │             │ Envoi email │
+    │◄─────────────────────────────────────────────────────────────────────────Email+billets│
     │             │            │                │               │             │             │
 ```
