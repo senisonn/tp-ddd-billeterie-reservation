@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs>
+    <style>text { font-family: 'Inter', 'Roboto', Arial, sans-serif; }</style>
+  </defs>
+
+  <!-- ═══════════════════ FOND ═══════════════════ -->
+  <rect width="1200" height="720" fill="#111217"/>
+
+  <!-- ═══════════════════ BARRE D'EN-TÊTE ═══════════════════ -->
+  <rect x="0" y="0" width="1200" height="48" fill="#1f2231"/>
+  <rect x="10" y="10" width="28" height="28" rx="4" fill="#f46800"/>
+  <text x="24" y="29" text-anchor="middle" fill="white" font-size="14" font-weight="bold">G</text>
+  <text x="50" y="31" fill="#d8d9da" font-size="15" font-weight="bold">Billetterie &amp; Réservation — Dashboard Opérationnel</text>
+  <text x="1185" y="31" fill="#8e8e8e" font-size="12" text-anchor="end">Dernière 1h  ▼</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANEL 1  [TECHNIQUE] — Temps de réponse HTTP
+  ═══════════════════════════════════════════════════════════ -->
+  <rect x="10" y="58" width="578" height="305" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <!-- Titre + sous-titre -->
+  <text x="22" y="78"  fill="#d8d9da" font-size="13" font-weight="bold">[TECHNIQUE]  Temps de réponse HTTP — api-reservation</text>
+  <text x="22" y="94"  fill="#8e8e8e" font-size="10">Métrique : http_request_duration_seconds  ·  Percentiles p50 / p95 / p99</text>
+  <!-- Étiquette axe Y (tournée) -->
+  <text x="18" y="213" fill="#8e8e8e" font-size="10" transform="rotate(-90,18,213)" text-anchor="middle">Durée (ms)</text>
+
+  <!-- Zone de tracé : x=70..573, y=108..318  (W=503, H=210) -->
+  <rect x="70" y="108" width="503" height="210" fill="#161622"/>
+
+  <!-- Grille horizontale -->
+  <line x1="70" y1="318"   x2="573" y2="318"   stroke="#2d3250" stroke-width="1"/>
+  <line x1="70" y1="265.5" x2="573" y2="265.5" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="70" y1="213"   x2="573" y2="213"   stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="70" y1="160.5" x2="573" y2="160.5" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="70" y1="108"   x2="573" y2="108"   stroke="#2d3250" stroke-width="1"/>
+
+  <!-- Étiquettes axe Y (ms) — échelle 0–400, y = 318 − val×0.525 -->
+  <text x="65" y="321"   fill="#8e8e8e" font-size="10" text-anchor="end">0</text>
+  <text x="65" y="269"   fill="#8e8e8e" font-size="10" text-anchor="end">100</text>
+  <text x="65" y="217"   fill="#8e8e8e" font-size="10" text-anchor="end">200</text>
+  <text x="65" y="164"   fill="#8e8e8e" font-size="10" text-anchor="end">300</text>
+  <text x="65" y="112"   fill="#8e8e8e" font-size="10" text-anchor="end">400</text>
+
+  <!-- Grille verticale + étiquettes axe X (temps 14:00→15:00, 5 graduations)
+       x = 70, 195.75, 321.5, 447.25, 573 -->
+  <line x1="195.75" y1="108" x2="195.75" y2="318" stroke="#2d3250" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <line x1="321.5"  y1="108" x2="321.5"  y2="318" stroke="#2d3250" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <line x1="447.25" y1="108" x2="447.25" y2="318" stroke="#2d3250" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <text x="70"     y="334" fill="#8e8e8e" font-size="10" text-anchor="middle">14:00</text>
+  <text x="195.75" y="334" fill="#8e8e8e" font-size="10" text-anchor="middle">14:15</text>
+  <text x="321.5"  y="334" fill="#8e8e8e" font-size="10" text-anchor="middle">14:30</text>
+  <text x="447.25" y="334" fill="#8e8e8e" font-size="10" text-anchor="middle">14:45</text>
+  <text x="573"    y="334" fill="#8e8e8e" font-size="10" text-anchor="middle">15:00</text>
+  <text x="321.5"  y="350" fill="#8e8e8e" font-size="11" text-anchor="middle">Temps</text>
+
+  <!-- Aire p50 -->
+  <polygon points="70,274.9 195.75,267.5 321.5,260.2 447.25,264.4 573,271.8 573,318 70,318"
+           fill="#73bf69" opacity="0.12"/>
+
+  <!-- Courbes (p99 en dessous → tracée en premier pour z-order) -->
+  <polyline points="70,198.3 195.75,177.3 321.5,161.5 447.25,174.1 573,186.8"
+            fill="none" stroke="#f2495c" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="70,240.3 195.75,222.8 321.5,203.6 447.25,213.0 573,227.7"
+            fill="none" stroke="#ff9830" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="70,274.9 195.75,267.5 321.5,260.2 447.25,264.4 573,271.8"
+            fill="none" stroke="#73bf69" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Points de données p50 -->
+  <circle cx="70"     cy="274.9" r="3" fill="#73bf69"/>
+  <circle cx="195.75" cy="267.5" r="3" fill="#73bf69"/>
+  <circle cx="321.5"  cy="260.2" r="3" fill="#73bf69"/>
+  <circle cx="447.25" cy="264.4" r="3" fill="#73bf69"/>
+  <circle cx="573"    cy="271.8" r="3" fill="#73bf69"/>
+  <!-- Points p95 -->
+  <circle cx="70"     cy="240.3" r="3" fill="#ff9830"/>
+  <circle cx="195.75" cy="222.8" r="3" fill="#ff9830"/>
+  <circle cx="321.5"  cy="203.6" r="3" fill="#ff9830"/>
+  <circle cx="447.25" cy="213.0" r="3" fill="#ff9830"/>
+  <circle cx="573"    cy="227.7" r="3" fill="#ff9830"/>
+  <!-- Points p99 -->
+  <circle cx="70"     cy="198.3" r="3" fill="#f2495c"/>
+  <circle cx="195.75" cy="177.3" r="3" fill="#f2495c"/>
+  <circle cx="321.5"  cy="161.5" r="3" fill="#f2495c"/>
+  <circle cx="447.25" cy="174.1" r="3" fill="#f2495c"/>
+  <circle cx="573"    cy="186.8" r="3" fill="#f2495c"/>
+
+  <!-- Seuil d'alerte à 300 ms : y = 318 − 300×0.525 = 160.5 -->
+  <line x1="70" y1="160.5" x2="573" y2="160.5"
+        stroke="#f2495c" stroke-width="1.2" stroke-dasharray="6,3" opacity="0.75"/>
+  <text x="577" y="164" fill="#f2495c" font-size="9">⚠ 300 ms</text>
+
+  <!-- Légende -->
+  <rect x="390" y="110" width="14" height="3" fill="#73bf69" rx="1"/>
+  <text x="408" y="119" fill="#d8d9da" font-size="10">p50 — médiane</text>
+  <rect x="390" y="126" width="14" height="3" fill="#ff9830" rx="1"/>
+  <text x="408" y="135" fill="#d8d9da" font-size="10">p95</text>
+  <rect x="390" y="142" width="14" height="3" fill="#f2495c" rx="1"/>
+  <text x="408" y="151" fill="#d8d9da" font-size="10">p99  (seuil alerte: 300 ms)</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANEL 2  [MÉTIER] — Réservations créées par heure
+  ═══════════════════════════════════════════════════════════ -->
+  <rect x="612" y="58" width="578" height="305" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="624" y="78"  fill="#d8d9da" font-size="13" font-weight="bold">[MÉTIER]  Réservations créées par heure — ContexteRéservation</text>
+  <text x="624" y="94"  fill="#8e8e8e" font-size="10">Métrique : reservations_creees_total  ·  PromQL : increase(reservations_creees_total[1h])</text>
+  <text x="620" y="213" fill="#8e8e8e" font-size="10" transform="rotate(-90,620,213)" text-anchor="middle">Nb réservations / h</text>
+
+  <!-- Zone de tracé : x=672..1180, y=108..318  (W=508, H=210) -->
+  <rect x="672" y="108" width="508" height="210" fill="#161622"/>
+
+  <!-- Grille horizontale — échelle 0–80, y = 318 − val×2.625 -->
+  <line x1="672" y1="318"   x2="1180" y2="318"   stroke="#2d3250" stroke-width="1"/>
+  <line x1="672" y1="265.5" x2="1180" y2="265.5" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="672" y1="213"   x2="1180" y2="213"   stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="672" y1="160.5" x2="1180" y2="160.5" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="672" y1="108"   x2="1180" y2="108"   stroke="#2d3250" stroke-width="1"/>
+
+  <!-- Étiquettes axe Y -->
+  <text x="667" y="321"   fill="#8e8e8e" font-size="10" text-anchor="end">0</text>
+  <text x="667" y="269"   fill="#8e8e8e" font-size="10" text-anchor="end">20</text>
+  <text x="667" y="217"   fill="#8e8e8e" font-size="10" text-anchor="end">40</text>
+  <text x="667" y="164"   fill="#8e8e8e" font-size="10" text-anchor="end">60</text>
+  <text x="667" y="112"   fill="#8e8e8e" font-size="10" text-anchor="end">80</text>
+
+  <!-- Barres (7 heures 13h→19h)
+       gap = 508/7 = 72.57 px  |  largeur barre = 45 px
+       centres : 708.3, 780.9, 853.4, 926.0, 998.6, 1071.1, 1143.7
+       bordure gauche : 685.8, 758.4, 830.9, 903.5, 976.1, 1048.6, 1121.2
+       valeurs : 25, 42, 55, 68, 62, 48, 30
+       hauteurs (×2.625) : 65.6, 110.2, 144.4, 178.5, 162.8, 126.0, 78.8
+       y_top = 318 − hauteur -->
+
+  <!-- 13h : 25 → h=65.6, top=252.4 -->
+  <rect x="685.8" y="252.4" width="45" height="65.6" fill="#5794f2" rx="2" opacity="0.85"/>
+  <text x="708.3" y="248"   fill="#8e8e8e" font-size="10" text-anchor="middle">25</text>
+  <text x="708.3" y="334"   fill="#8e8e8e" font-size="10" text-anchor="middle">13h</text>
+
+  <!-- 14h : 42 → h=110.2, top=207.8 -->
+  <rect x="758.4" y="207.8" width="45" height="110.2" fill="#5794f2" rx="2" opacity="0.85"/>
+  <text x="780.9" y="203"   fill="#8e8e8e" font-size="10" text-anchor="middle">42</text>
+  <text x="780.9" y="334"   fill="#8e8e8e" font-size="10" text-anchor="middle">14h</text>
+
+  <!-- 15h : 55 → h=144.4, top=173.6 -->
+  <rect x="830.9" y="173.6" width="45" height="144.4" fill="#5794f2" rx="2" opacity="0.85"/>
+  <text x="853.4" y="169"   fill="#8e8e8e" font-size="10" text-anchor="middle">55</text>
+  <text x="853.4" y="334"   fill="#8e8e8e" font-size="10" text-anchor="middle">15h</text>
+
+  <!-- 16h : 68 → h=178.5, top=139.5  (pic) -->
+  <rect x="903.5" y="139.5" width="45" height="178.5" fill="#5794f2" rx="2"/>
+  <text x="926.0" y="135"   fill="#d8d9da" font-size="10" text-anchor="middle" font-weight="bold">68 ▲</text>
+  <text x="926.0" y="334"   fill="#8e8e8e" font-size="10" text-anchor="middle">16h</text>
+
+  <!-- 17h : 62 → h=162.8, top=155.2 -->
+  <rect x="976.1" y="155.2" width="45" height="162.8" fill="#5794f2" rx="2" opacity="0.90"/>
+  <text x="998.6" y="150"   fill="#d8d9da" font-size="10" text-anchor="middle">62</text>
+  <text x="998.6" y="334"   fill="#8e8e8e" font-size="10" text-anchor="middle">17h</text>
+
+  <!-- 18h : 48 → h=126.0, top=192 -->
+  <rect x="1048.6" y="192"  width="45" height="126"   fill="#5794f2" rx="2" opacity="0.85"/>
+  <text x="1071.1" y="187"  fill="#8e8e8e" font-size="10" text-anchor="middle">48</text>
+  <text x="1071.1" y="334"  fill="#8e8e8e" font-size="10" text-anchor="middle">18h</text>
+
+  <!-- 19h : 30 → h=78.8, top=239.2 -->
+  <rect x="1121.2" y="239.2" width="45" height="78.8" fill="#5794f2" rx="2" opacity="0.85"/>
+  <text x="1143.7" y="234"  fill="#8e8e8e" font-size="10" text-anchor="middle">30</text>
+  <text x="1143.7" y="334"  fill="#8e8e8e" font-size="10" text-anchor="middle">19h</text>
+
+  <!-- Axe X label -->
+  <text x="926.0" y="350" fill="#8e8e8e" font-size="11" text-anchor="middle">Heure de la journée</text>
+
+  <!-- Légende -->
+  <rect x="780" y="110" width="14" height="14" fill="#5794f2" rx="2"/>
+  <text x="798" y="121" fill="#d8d9da" font-size="10">Réservations créées (INV-R1/R2 validés)</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       KPI PANELS (statistiques en temps réel)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- KPI 1 — Réservations créées -->
+  <rect x="10"  y="373" width="280" height="84" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="22"  y="393" fill="#8e8e8e" font-size="11">Réservations créées (24h)</text>
+  <text x="22"  y="432" fill="#d8d9da" font-size="30" font-weight="bold">1 247</text>
+  <text x="22"  y="450" fill="#73bf69" font-size="11">↑  +12 % vs hier</text>
+
+  <!-- KPI 2 — Confirmées -->
+  <rect x="300" y="373" width="280" height="84" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="312" y="393" fill="#8e8e8e" font-size="11">Réservations confirmées (24h)</text>
+  <text x="312" y="432" fill="#d8d9da" font-size="30" font-weight="bold">1 182</text>
+  <text x="312" y="450" fill="#73bf69" font-size="11">↑  +10 % vs hier</text>
+
+  <!-- KPI 3 — Taux succès paiement -->
+  <rect x="590" y="373" width="280" height="84" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="602" y="393" fill="#8e8e8e" font-size="11">Taux succès paiement</text>
+  <text x="602" y="432" fill="#d8d9da" font-size="30" font-weight="bold">94.8 %</text>
+  <text x="602" y="450" fill="#ff9830" font-size="11">↓  -0.2 % vs hier</text>
+
+  <!-- KPI 4 — QR scannés -->
+  <rect x="880" y="373" width="310" height="84" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="892" y="393" fill="#8e8e8e" font-size="11">QR codes scannés (aujourd'hui)</text>
+  <text x="892" y="432" fill="#d8d9da" font-size="30" font-weight="bold">842</text>
+  <text x="892" y="450" fill="#73bf69" font-size="11">↑  +5 % vs hier</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANEL 3  [TECHNIQUE] — Taux d'erreurs HTTP
+  ═══════════════════════════════════════════════════════════ -->
+  <rect x="10" y="467" width="578" height="245" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="22" y="487" fill="#d8d9da" font-size="13" font-weight="bold">[TECHNIQUE]  Taux d'erreurs HTTP (4xx + 5xx) — api-reservation</text>
+  <text x="22" y="503" fill="#8e8e8e" font-size="10">Métrique : http_errors_total / http_requests_total × 100  ·  Seuil alerte : &gt; 5 %</text>
+  <text x="18" y="595" fill="#8e8e8e" font-size="10" transform="rotate(-90,18,595)" text-anchor="middle">Taux erreur (%)</text>
+
+  <!-- Zone de tracé : x=70..573, y=512..682  (W=503, H=170)
+       Échelle Y : 0–6 %,  y = 682 − val×28.33 -->
+  <rect x="70" y="512" width="503" height="170" fill="#161622"/>
+
+  <!-- Grille horizontale -->
+  <line x1="70" y1="682" x2="573" y2="682" stroke="#2d3250" stroke-width="1"/>
+  <line x1="70" y1="625" x2="573" y2="625" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="70" y1="568" x2="573" y2="568" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="4,3"/>
+  <line x1="70" y1="512" x2="573" y2="512" stroke="#2d3250" stroke-width="1"/>
+
+  <!-- Étiquettes axe Y -->
+  <text x="65" y="685" fill="#8e8e8e" font-size="10" text-anchor="end">0 %</text>
+  <text x="65" y="628" fill="#8e8e8e" font-size="10" text-anchor="end">2 %</text>
+  <text x="65" y="571" fill="#8e8e8e" font-size="10" text-anchor="end">4 %</text>
+  <text x="65" y="516" fill="#8e8e8e" font-size="10" text-anchor="end">6 %</text>
+
+  <!-- Grille verticale + étiquettes axe X -->
+  <line x1="195.75" y1="512" x2="195.75" y2="682" stroke="#2d3250" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <line x1="321.5"  y1="512" x2="321.5"  y2="682" stroke="#2d3250" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <line x1="447.25" y1="512" x2="447.25" y2="682" stroke="#2d3250" stroke-width="0.5" stroke-dasharray="3,4"/>
+  <text x="70"     y="698" fill="#8e8e8e" font-size="10" text-anchor="middle">14:00</text>
+  <text x="195.75" y="698" fill="#8e8e8e" font-size="10" text-anchor="middle">14:15</text>
+  <text x="321.5"  y="698" fill="#8e8e8e" font-size="10" text-anchor="middle">14:30</text>
+  <text x="447.25" y="698" fill="#8e8e8e" font-size="10" text-anchor="middle">14:45</text>
+  <text x="573"    y="698" fill="#8e8e8e" font-size="10" text-anchor="middle">15:00</text>
+  <text x="321.5"  y="710" fill="#8e8e8e" font-size="11" text-anchor="middle">Temps</text>
+
+  <!-- Aire + courbe erreurs — valeurs [0.8, 1.5, 0.7, 2.2, 1.0]
+       y = 682 − val×28.33 → 659.3, 639.5, 662.2, 619.7, 653.7 -->
+  <polygon points="70,659.3 195.75,639.5 321.5,662.2 447.25,619.7 573,653.7 573,682 70,682"
+           fill="#f2495c" opacity="0.15"/>
+  <polyline points="70,659.3 195.75,639.5 321.5,662.2 447.25,619.7 573,653.7"
+            fill="none" stroke="#f2495c" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="70"     cy="659.3" r="3" fill="#f2495c"/>
+  <circle cx="195.75" cy="639.5" r="3" fill="#f2495c"/>
+  <circle cx="321.5"  cy="662.2" r="3" fill="#f2495c"/>
+  <circle cx="447.25" cy="619.7" r="3" fill="#f2495c"/>
+  <circle cx="573"    cy="653.7" r="3" fill="#f2495c"/>
+
+  <!-- Seuil d'alerte 5 % : y = 682 − 5×28.33 = 540.4 -->
+  <line x1="70" y1="540.4" x2="573" y2="540.4"
+        stroke="#ff9830" stroke-width="1.2" stroke-dasharray="6,3" opacity="0.85"/>
+  <text x="577" y="544" fill="#ff9830" font-size="9">⚠ 5 %</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANEL 4  [MÉTIER] — Jauge disponible par événement
+  ═══════════════════════════════════════════════════════════ -->
+  <rect x="612" y="467" width="578" height="245" rx="3" fill="#1f2231" stroke="#3a3f5e" stroke-width="1"/>
+  <text x="624" y="487" fill="#d8d9da" font-size="13" font-weight="bold">[MÉTIER]  Jauge disponible — Places restantes par événement</text>
+  <text x="624" y="503" fill="#8e8e8e" font-size="10">Métrique : jauge_disponible{evenement_id}  ·  Contraintes INV-E1 &amp; INV-E2</text>
+
+  <!-- Axe X commun aux 3 jauges — 0 % … 100 %  (x=672..1178, W=506) -->
+  <text x="672"  y="533" fill="#8e8e8e" font-size="9">0 %</text>
+  <text x="798.5" y="533" fill="#8e8e8e" font-size="9" text-anchor="middle">25 %</text>
+  <text x="925"  y="533" fill="#8e8e8e" font-size="9" text-anchor="middle">50 %</text>
+  <text x="1051.5" y="533" fill="#8e8e8e" font-size="9" text-anchor="middle">75 %</text>
+  <text x="1178" y="533" fill="#8e8e8e" font-size="9" text-anchor="end">100 %</text>
+  <text x="925"  y="543" fill="#8e8e8e" font-size="9" text-anchor="middle">Taux de remplissage</text>
+
+  <!-- Graduations verticales -->
+  <line x1="798.5"  y1="547" x2="798.5"  y2="690" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="3,3"/>
+  <line x1="925"    y1="547" x2="925"    y2="690" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="3,3"/>
+  <line x1="1051.5" y1="547" x2="1051.5" y2="690" stroke="#2d3250" stroke-width="0.7" stroke-dasharray="3,3"/>
+
+  <!-- EVT-2025-00034 : Concert Jazz — 21 / 500 = 4.2 % (critique) -->
+  <text x="624" y="563" fill="#d8d9da" font-size="11" font-weight="bold">EVT-2025-00034</text>
+  <text x="624" y="575" fill="#8e8e8e" font-size="10">Concert Jazz · 21 / 500 places</text>
+  <rect x="672" y="578" width="506" height="20" rx="3" fill="#1a1a2e"/>
+  <rect x="672" y="578" width="21"  height="20" rx="3" fill="#f2495c"/>
+  <text x="700" y="592" fill="#f2495c" font-size="10">4 %  ⚠</text>
+
+  <!-- EVT-2025-00035 : Théâtre — 180 / 300 = 60 % (disponible) -->
+  <text x="624" y="618" fill="#d8d9da" font-size="11" font-weight="bold">EVT-2025-00035</text>
+  <text x="624" y="630" fill="#8e8e8e" font-size="10">Théâtre · 180 / 300 places</text>
+  <rect x="672" y="633" width="506"   height="20" rx="3" fill="#1a1a2e"/>
+  <rect x="672" y="633" width="303.6" height="20" rx="3" fill="#73bf69"/>
+  <text x="984" y="647" fill="#1f2231" font-size="10" text-anchor="middle" font-weight="bold">60 %</text>
+
+  <!-- EVT-2025-00036 : Opéra — 0 / 400 = Complet (INV-E2) -->
+  <text x="624" y="672" fill="#d8d9da" font-size="11" font-weight="bold">EVT-2025-00036</text>
+  <text x="624" y="684" fill="#8e8e8e" font-size="10">Opéra · 0 / 400 places</text>
+  <rect x="672" y="687" width="506" height="20" rx="3" fill="#1a1a2e"/>
+  <rect x="672" y="687" width="506" height="20" rx="3" fill="#8e8e8e" opacity="0.55"/>
+  <text x="925" y="701" fill="#1f2231" font-size="11" text-anchor="middle" font-weight="bold">■  COMPLET  —  INV-E2 actif</text>
+
+  <!-- Légende couleurs -->
+  <rect x="624" y="710" width="12" height="10" rx="2" fill="#f2495c"/>
+  <text x="640" y="719" fill="#8e8e8e" font-size="10">Critique (&lt; 10 %)</text>
+  <rect x="740" y="710" width="12" height="10" rx="2" fill="#73bf69"/>
+  <text x="756" y="719" fill="#8e8e8e" font-size="10">Disponible</text>
+  <rect x="830" y="710" width="12" height="10" rx="2" fill="#8e8e8e" opacity="0.55"/>
+  <text x="846" y="719" fill="#8e8e8e" font-size="10">Complet (INV-E2)</text>
+
+</svg>
